@@ -1,5 +1,4 @@
 import random
-import params
 from ctypes import *
 from math import exp
 
@@ -13,6 +12,16 @@ from math import exp
 ## NOTE: The primary logic for this code can be found at (http://www.ai-junkie.com/ann/evolved/nnt6.html).
 ## I do not own the logic for this code. I simply converted the code into Python from C++.
 ## My goal is to eventually reconstruct the network as I see fit, using this as a temporary 'blueprint'.
+
+# The parameters for the neural network.
+class NNParams:
+	def __init__(self):
+		self.P_inputNum = 6
+		self.P_numOutputs = 1
+		self.P_numHiddenLayers = 3
+		self.P_neuronsPerLayer = 3
+		self.P_activationResponse = 5.7
+		self.P_biasValue = 4.9
 
 # Initializes a neuron based on number of inputs.
 class Neuron:
@@ -29,7 +38,7 @@ class NeuronLayer:
 class NeuralNet:
 	# Initializes the neural net based on the default values in params.py.
 	def __init__(self):
-		init = params.Params()
+		init = NNParams()
 		self.numInputs = init.P_inputNum
 		self.numOutputs = init.P_numOutputs
 		self.numHiddenLayers = init.P_numHiddenLayers
@@ -77,8 +86,8 @@ class NeuralNet:
 		return weights
 
 	# Calculates the output vector when given an input vector.
-	def update(self,inputs=list(i for i in range(params.Params().P_numOutputs))):
-		init = params.Params()
+	def update(self,inputs=list(i for i in range(NNParams().P_numOutputs))):
+		init = NNParams()
 		outputs = list()
 		weightVal = 0
 		if len(inputs) is not init.P_numOutputs:
